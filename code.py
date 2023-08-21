@@ -101,16 +101,11 @@ while True:
         blink_led(delay)
 
     if uart.in_waiting:
-        #print(uart.readline());
-        #time.sleep(0.2)
-        #print("Data: " + data)
-        #data = uart.readline()
-        #print("Incoming data: " + data)
-        blink_led(delay)
-        blink_led(delay)
-        blink_led(delay)
-        blink_led(delay)
-        blink_led(delay)
+        data = uart.read(10)
+        time.sleep(0.2)
+        text = data.decode('utf-8').strip()
+        text_area = label.Label(terminalio.FONT, text=text, color=0xFFFF00, x=2, y=5)
+        display.show(text_area)
         uart.reset_input_buffer()
 
     time.sleep(0.1)    
